@@ -1,0 +1,65 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using Banco_de_Dados_ADO.net_Pós.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AcervoController : ControllerBase
+    {
+        private IAcervoRepo _repository;
+        private SqlConnection _connection;
+
+        public AcervoController()
+        {
+            _repository = new AcervoRepo();
+
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_repository.Get());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+          var acervo =  _repository.Get(id);
+
+            if(acervo ==null)
+            {
+                return NotFound();
+            }
+
+               return Ok(acervo);
+        }
+        [HttpPost]
+
+        public IActionResult Insert([FromBody]Acervo acervo)
+        {
+            _repository.Insert(acervo);
+            return Ok(acervo);
+        }
+        [HttpPut]
+
+        public IActionResult Update([FromBody] Acervo acervo)
+        {
+            _repository.Update(acervo);
+            return Ok(acervo);
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _repository.Delete(id);
+            return Ok();
+        }
+    }
+}

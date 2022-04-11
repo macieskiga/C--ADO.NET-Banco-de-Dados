@@ -1,0 +1,61 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Repositories
+{
+   public class EditoraRepo : IEditoraRepo
+   { 
+     private static List<Editora> _db = new List<Editora>()
+        {
+         new Editora(){id = 1, nome="Cambridge Press"},
+         new Editora(){id = 2, nome="William Morrow & Company"},
+         new Editora(){id = 3, nome="Oxford Press"}
+
+        };
+       
+        public List<Editora> Get()
+        {
+              return _db;
+        }
+
+        public Editora Get(int id)
+        {
+              return _db.FirstOrDefault(a=> a.id == id);
+        }
+
+        public void Insert(Editora editora)
+        {
+            var ultimaEditora = _db.LastOrDefault();
+
+            if(ultimaEditora == null)
+            {
+                editora.id = 1;
+            }
+            else
+            {
+                editora.id = ultimaEditora.id;
+                editora.id++;
+            }
+            _db.Add(editora);
+        }
+
+        public void Update(Editora editora)
+        {
+           _db.Remove(_db.FirstOrDefault(a => a.id == editora.id));
+        _db.Add(editora);
+
+        }
+        public void Delete(int id)
+        {
+         _db.Remove(_db.FirstOrDefault(a => a.id == id));
+    }
+
+        public void Insert(EditoraRepo editora)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

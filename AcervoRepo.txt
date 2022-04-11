@@ -1,0 +1,78 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Repositories
+{
+   public class AcervoRepo : IAcervoRepo
+   {
+        private System.Data.IDbConnection _connection;
+
+       public AcervoRepo()
+           {
+
+
+            _connection = new SqlConnection("server=127.0.0.1;uid=root;" +
+    "pwd=ga050504;database=banco de dados adonet");
+        }
+
+     private static List<Acervo> _db = new List<Acervo>()
+       { 
+         new Acervo(){id = 1, titulo="The Fall of Constantinople 1453", autor="Steven Runciman", ano= 1957, preco= 33.90, quantidade= 5, tipo= 2},
+         new Acervo(){id = 2, titulo="The Fall of Gondolin", autor="John Ronald Reuel Tolkien", ano= 2018, preco= 59.90, quantidade= 2, tipo= 3},
+         new Acervo(){id = 3, titulo="The Rise and Fall of the Roman Empire", autor="Edward Gibbons", ano= 1776, preco= 498.54, quantidade= 1, tipo= 1}
+
+        };
+       
+        public List<Acervo> Get()
+        {
+              return _db;
+        }
+
+       
+        public Acervo Get(string titulo)
+        {
+            return _db.FirstOrDefault(a => a.titulo == titulo);
+        }
+
+        public void Insert(Acervo acervo)
+        {
+            var ultimoAcervo= _db.LastOrDefault();
+
+            if(ultimoAcervo == null)
+            {
+                acervo.id = 1;
+            }
+            else
+            {
+                acervo.id = ultimoAcervo.id;
+                acervo.id++;
+            }
+            _db.Add(acervo);
+        }
+
+        public void Update(Acervo acervo)
+        {
+           _db.Remove(_db.FirstOrDefault(a => a.id == acervo.id));
+        _db.Add(acervo);
+
+        }
+        public void Delete(int id)
+        {
+         _db.Remove(_db.FirstOrDefault(a => a.id == id));
+    }
+
+        public void Insert(AcervoRepo acervo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Acervo Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

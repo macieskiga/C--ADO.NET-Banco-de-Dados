@@ -1,0 +1,62 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using Banco_de_Dados_ADO.net_Pós.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EditoraController : ControllerBase
+    {
+        private IEditoraRepo _repository;
+        public EditoraController()
+        {
+            _repository = new EditoraRepo();
+
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_repository.Get());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+          var editora =  _repository.Get(id);
+
+            if(editora ==null)
+            {
+                return NotFound();
+            }
+
+               return Ok(editora);
+        }
+        [HttpPost]
+
+        public IActionResult Insert([FromBody]Editora editora)
+        {
+            _repository.Insert(editora);
+            return Ok(editora);
+        }
+        [HttpPut]
+
+        public IActionResult Update([FromBody]Editora editora)
+        {
+            _repository.Update(editora);
+            return Ok(editora);
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _repository.Delete(id);
+            return Ok();
+        }
+    }
+}

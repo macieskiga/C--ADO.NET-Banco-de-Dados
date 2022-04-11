@@ -1,0 +1,20 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Repositories
+{
+    interface IUsuarioRepository
+    {
+        public List<Usuario> Get();
+        public Usuario Get(int id);
+        public void Insert(Usuario usuario);
+
+        public void Update(Usuario usuario);
+
+        public void Delete(int id);
+        void Insert(UsuarioRepository usuario);
+    }
+}

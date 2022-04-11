@@ -1,0 +1,22 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Repositories
+{
+    interface IAcervoRepo
+    {
+        public List<Acervo> Get();
+        public Acervo Get(int id);
+
+        public Acervo Get(string titulo);
+        public void Insert(Acervo acervo);
+
+        public void Update(Acervo acervo);
+
+        public void Delete(int id);
+        void Insert(AcervoRepo acervo);
+    }
+}

@@ -1,0 +1,20 @@
+using Banco_de_Dados_ADO.net_Pós.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Repositories
+{
+    interface IEditoraRepo
+    {
+        public List<Editora> Get();
+        public Editora Get(int id);
+        public void Insert(Editora editora);
+
+        public void Update(Editora editora);
+
+        public void Delete(int id);
+        void Insert(EditoraRepo editora);
+    }
+}

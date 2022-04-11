@@ -1,0 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Banco_de_Dados_ADO.net_Pós.Models
+{
+    public class Editora
+    {
+        public int id { get; set; }
+
+        public string nome { get; set; }
+
+       
+    }
+}
