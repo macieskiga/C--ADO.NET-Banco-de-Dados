@@ -16,7 +16,7 @@ namespace Banco_de_Dados_ADO.net_Pós.Repositories
 
 
             _connection = new SqlConnection("server=127.0.0.1;uid=root;" +
-    "pwd=ga050504;database=banco de dados adonet");
+    "pwd=x;database=banco de dados adonet");
         }
 
      private static List<Acervo> _db = new List<Acervo>()
